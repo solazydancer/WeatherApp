@@ -1,0 +1,47 @@
+﻿@model WeatherApp.Models.WeatherModel
+@{
+    ViewBag.Title = "Home Page";
+
+}
+<!DOCTYPE html>
+<head>
+
+</head>
+<body>
+    @using (Html.BeginForm("GetWeatherInfo", "Home", FormMethod.Post))
+    {
+        <div>
+            <p><input type="text" id="cityName" name="cityName"></p>
+
+            <p><input type="submit" value="Отправить форму"></p>
+        </div>
+    }
+    @if (Model != null)
+    {
+        if (Model.message != "Данные отсутствуют")
+        {
+
+            <div>
+                @Html.Label("Температура:")
+                @Html.Raw(Model.main.temp)
+            </div>
+            <div>
+                @Html.Label("Давление:")
+                @Html.Raw(Model.main.pressure)
+            </div>
+            <div>
+                @Html.Label("Скорость ветра:")
+                @Html.Raw(Model.wind.speed)
+            </div>
+            <div>
+                @Html.Raw(Model.reccomendation)
+            </div>
+        }
+        else
+        {
+            <div>
+                <p>@Html.Raw(Model.message)</p>
+            </div>
+        }
+    }
+</body>
